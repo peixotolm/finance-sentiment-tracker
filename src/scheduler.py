@@ -29,7 +29,9 @@ class Scheduler:
             logger.info("Starting sentiment analysis job...")
             current_time = datetime.now(timezone.utc)
             # Define the time range for the analysis
-            from_date = (current_time - timedelta(hours=24)).isoformat()  # Last 24 hours
+            from_date = (
+                current_time - timedelta(hours=24)
+            ).isoformat()  # Last 24 hours
             to_date = current_time.isoformat()
 
             for product in self.products:
@@ -40,12 +42,14 @@ class Scheduler:
                     product=product,
                     per_page=self.per_page,
                     from_date=from_date,
-                    to_date=to_date
+                    to_date=to_date,
                 )
 
                 # Fetch sentiment and compare with previous state
                 sentiment_analyzer.fetch_sentiment()
-                self._process_sentiment_change(product, sentiment_analyzer.get_sentiment_summary())
+                self._process_sentiment_change(
+                    product, sentiment_analyzer.get_sentiment_summary()
+                )
 
             logger.info("Sentiment analysis job completed.")
             logger.info(f"Next job will run in {self.interval} seconds.")
@@ -67,12 +71,16 @@ class Scheduler:
             return max(sentiment_counts, key=sentiment_counts.get)
 
         new_predominant = get_predominant_sentiment(new_sentiment)
-        old_predominant = get_predominant_sentiment(old_sentiment) if old_sentiment else None
+        old_predominant = (
+            get_predominant_sentiment(old_sentiment) if old_sentiment else None
+        )
 
         # Log predominant sentiment change
         if old_predominant and old_predominant != new_predominant:
             logger.info(f"Sentiment shift for {product.title} detected!")
-            logger.info(f"Shift: {old_predominant.upper()} -> {new_predominant.upper()}")
+            logger.info(
+                f"Shift: {old_predominant.upper()} -> {new_predominant.upper()}"
+            )
 
         # Log initial recording if no prior sentiment
         if not old_sentiment:
@@ -83,9 +91,11 @@ class Scheduler:
             product=product,
             per_page=self.per_page,
             from_date=datetime.now(timezone.utc).isoformat(),  # Current timestamp
-            to_date=datetime.now(timezone.utc).isoformat()
+            to_date=datetime.now(timezone.utc).isoformat(),
         )
-        sentiment_analyzer.sentiment_count = new_sentiment  # Populate the sentiment count
+        sentiment_analyzer.sentiment_count = (
+            new_sentiment  # Populate the sentiment count
+        )
         sentiment_analyzer.save_to_db()
 
         # Update sentiment history
