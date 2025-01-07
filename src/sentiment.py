@@ -1,14 +1,10 @@
-import logging
 import requests
 
 from db import SessionLocal, SentimentData
 from decouple import config
+from logging_config import logger
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-API_KEY = config("API_KEY")
+APITUBE_API_KEY = config("APITUBE_API_KEY")
 
 
 class Sentiment:
@@ -32,7 +28,7 @@ class Sentiment:
             "category": "finance",
             "title": self.product.title,
             "language": "en",
-            "api_key": API_KEY,
+            "api_key": APITUBE_API_KEY,
             "per_page": self.per_page,
         }
 
