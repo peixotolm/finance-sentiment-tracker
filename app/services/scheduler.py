@@ -1,10 +1,9 @@
-from datetime import datetime, timedelta, timezone
 import time
+from datetime import datetime, timedelta, timezone
+
 from app.core.logging import logger
 from app.services.sentiment import Sentiment
-from app.services.stock_data_fetcher import (
-    StockDataFetcher,
-)  # Import your StockDataFetcher
+from app.services.stock import StockData
 
 
 class Scheduler:
@@ -54,7 +53,7 @@ class Scheduler:
 
                     # Fetch Stock Data
                     logger.info(f"Fetching stock data for product: {product.title}")
-                    stock_fetcher = StockDataFetcher(symbol=product.title)
+                    stock_fetcher = StockData(symbol=product.title)
                     stock_data = stock_fetcher.get_intraday_data(
                         interval=self.stock_interval
                     )

@@ -1,4 +1,4 @@
-from api.v1.endpoints.products import product_router
+from app.api.v1.endpoints.products import product_router
 from fastapi import FastAPI
 
 app = FastAPI()  # Define the app at the module level

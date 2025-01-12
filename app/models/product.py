@@ -1,12 +1,13 @@
-from models.base import Base
 from sqlalchemy import (
     Column,
     Integer,
     String,
 )
 from sqlalchemy.orm import relationship
-from models.sentiment import SentimentData
-from models.stock import StockData
+
+from app.models.base import Base
+from app.models.sentiment import SentimentData
+from app.models.stock import StockData
 
 
 class Product(Base):

@@ -1,7 +1,8 @@
-from models.base import Base
+from decouple import config
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from decouple import config
+
+from app.models.base import Base
 
 DATABASE_URL = config("DATABASE_URL", default="sqlite:///test.db")
 
