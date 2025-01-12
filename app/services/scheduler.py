@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta, timezone
 import time
-from logging_config import logger
-from sentiment import Sentiment
-from stock_data_fetcher import StockDataFetcher  # Import your StockDataFetcher
+from app.core.logging import logger
+from app.services.sentiment import Sentiment
+from app.services.stock_data_fetcher import (
+    StockDataFetcher,
+)  # Import your StockDataFetcher
 
 
 class Scheduler:
