@@ -4,7 +4,7 @@ from decouple import config
 ALPHA_VANTAGE_API_KEY = config("ALPHA_VANTAGE_API_KEY")
 
 
-class StockDataFetcher:
+class StockData:
     BASE_URL = "https://www.alphavantage.co/query"
 
     def __init__(self, symbol):

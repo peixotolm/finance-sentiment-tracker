@@ -1,8 +1,9 @@
 import requests
 
-from db import SessionLocal, SentimentData
+from core.database import SessionLocal
 from decouple import config
-from logging_config import logger
+from core.logging import logger
+from models.sentiment import SentimentData
 
 APITUBE_API_KEY = config("APITUBE_API_KEY")
 
