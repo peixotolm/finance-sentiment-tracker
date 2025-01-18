@@ -2,7 +2,7 @@ import requests
 from decouple import config
 
 from app.core.database import SessionLocal
-from app.core.logging import logger
+from app.core.logging_conf import logger
 from app.models.sentiment import SentimentData
 
 APITUBE_API_KEY = config("APITUBE_API_KEY")

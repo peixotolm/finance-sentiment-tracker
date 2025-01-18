@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from pydantic import BaseModel
 
 
@@ -8,7 +7,7 @@ class SentimentBase(BaseModel):
     positive_count: int
     neutral_count: int
     negative_count: int
-    timestamp: datetime
+    timestamp: datetime = datetime.utcnow()  # Default value
 
 
 class SentimentCreate(SentimentBase):
@@ -19,4 +18,4 @@ class Sentiment(SentimentBase):
     id: int
 
     class Config:
-        from_attributes = True
+        orm_mode = True

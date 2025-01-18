@@ -1,7 +1,7 @@
 import time
 from datetime import datetime, timedelta, timezone
 
-from app.core.logging import logger
+from app.core.logging_conf import logger
 from app.services.sentiment import Sentiment
 from app.services.stock import StockData
 
