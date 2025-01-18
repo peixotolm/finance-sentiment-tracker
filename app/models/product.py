@@ -1,12 +1,11 @@
-from models.base import Base
 from sqlalchemy import (
     Column,
     Integer,
     String,
 )
 from sqlalchemy.orm import relationship
-from models.sentiment import SentimentData
-from models.stock import StockData
+
+from app.core.base import Base
 
 
 class Product(Base):
@@ -16,10 +15,10 @@ class Product(Base):
     title = Column(String, unique=True, nullable=False)
     description = Column(String)
 
-
-Product.sentiments = relationship(
-    "SentimentData", order_by=SentimentData.id, back_populates="product"
-)
-Product.stock_data = relationship(
-    "StockData", order_by=StockData.id, back_populates="product"
-)
+    # Define relationships using model names as strings to avoid circular imports
+    sentiments = relationship(
+        "SentimentData", order_by="SentimentData.id", back_populates="product"
+    )
+    stock_data = relationship(
+        "StockData", order_by="StockData.id", back_populates="product"
+    )
